@@ -37,3 +37,13 @@ async def ask(q: str):
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
     )
+async def stream_response():
+    try:
+        docs = retriever.invoke(q)
+        context = "\n\n".join(doc.page_content for doc in docs)
+        async for token in chain.astream({"context": context, "question": q}):
+            yield f"data: {token}\n\n"
+        yield "data: [DONE]\n\n"
+    except Exception as e:
+        yield f"data: ⚠️ Error: {str(e)}\n\n"
+        yield "data: [DONE]\n\n"
