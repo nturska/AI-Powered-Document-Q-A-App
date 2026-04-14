@@ -45,5 +45,9 @@ async def stream_response():
             yield f"data: {token}\n\n"
         yield "data: [DONE]\n\n"
     except Exception as e:
-        yield f"data: ⚠️ Error: {str(e)}\n\n"
+        error_str = str(e)
+        if "429" in error_str or "RESOURCE_EXHAUSTED" in error_str:
+            yield "data: ⚠️ Rate limit reached. Please wait 30 seconds and try again.\n\n"
+        else:
+            yield f"data: ⚠️ Something went wrong: {error_str[:120]}\n\n"
         yield "data: [DONE]\n\n"
