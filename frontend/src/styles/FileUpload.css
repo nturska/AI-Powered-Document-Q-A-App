@@ -1,0 +1,122 @@
+.file-upload {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--color-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-10) var(--space-6);
+    cursor: pointer;
+    background: var(--color-surface);
+    transition: border-color var(--transition-interactive),
+                background var(--transition-interactive),
+                box-shadow var(--transition-interactive);
+    outline: none;
+    user-select: none;
+  }
+  
+  .file-upload:hover:not([aria-disabled="true"]),
+  .file-upload:focus-visible {
+    border-color: var(--color-primary);
+    background: var(--color-surface-2);
+    box-shadow: 0 0 0 3px var(--color-primary-highlight);
+  }
+  
+  .file-upload--dragging {
+    border-color: var(--color-primary);
+    background: color-mix(in oklch, var(--color-primary) 6%, var(--color-surface));
+    box-shadow: 0 0 0 3px var(--color-primary-highlight);
+  }
+  
+  .file-upload--success {
+    border-style: solid;
+    border-color: var(--color-success);
+    background: color-mix(in oklch, var(--color-success) 6%, var(--color-surface));
+    cursor: default;
+  }
+  
+  .file-upload--error {
+    border-color: var(--color-error);
+    background: color-mix(in oklch, var(--color-error) 6%, var(--color-surface));
+  }
+  
+  .file-upload--uploading {
+    cursor: not-allowed;
+    opacity: 0.75;
+  }
+  
+  .file-upload__input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    pointer-events: none;
+  }
+  
+  .file-upload__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
+    pointer-events: none;
+    text-align: center;
+  }
+  
+  .file-upload__icon {
+    color: var(--color-text-muted);
+    transition: color var(--transition-interactive),
+                transform var(--transition-interactive);
+  }
+  
+  .file-upload--dragging .file-upload__icon,
+  .file-upload--success .file-upload__icon {
+    color: var(--color-primary);
+  }
+  
+  .file-upload--error .file-upload__icon {
+    color: var(--color-error);
+  }
+  
+  .file-upload__icon--spinning {
+    animation: spin 900ms linear infinite;
+  }
+  
+  .file-upload__icon--bounce {
+    animation: bounce-up 600ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  
+  .file-upload__label {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+  }
+  
+  .file-upload__subtext {
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+  }
+  
+  .file-upload__error {
+    font-size: var(--text-xs);
+    color: var(--color-error);
+    margin: 0;
+    font-weight: 500;
+  }
+  
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+  
+  @keyframes bounce-up {
+    from { transform: translateY(4px); opacity: 0.6; }
+    to   { transform: translateY(0);   opacity: 1; }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .file-upload__icon--spinning,
+    .file-upload__icon--bounce { animation: none; }
+  }

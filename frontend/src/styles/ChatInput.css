@@ -1,0 +1,89 @@
+.chat-input {
+    padding: var(--space-4) var(--space-6);
+    border-top: 1px solid var(--color-divider);
+    background: var(--color-surface);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  
+  .chat-input__wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-3);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3) var(--space-3) var(--space-3) var(--space-4);
+    transition: border-color var(--transition-interactive),
+                box-shadow var(--transition-interactive);
+  }
+  
+  .chat-input__wrapper:focus-within {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px var(--color-primary-highlight);
+  }
+  
+  .chat-input__wrapper--locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .chat-input__textarea {
+    flex: 1;
+    resize: none;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: var(--font-body);
+    font-size: var(--text-base);
+    color: var(--color-text);
+    line-height: 1.6;
+    min-height: 24px;
+    max-height: 160px;
+    overflow-y: auto;
+  }
+  
+  .chat-input__textarea::placeholder {
+    color: var(--color-text-faint);
+  }
+  
+  .chat-input__textarea:disabled {
+    cursor: not-allowed;
+  }
+  
+  .chat-input__send {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    background: var(--color-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background var(--transition-interactive),
+                transform var(--transition-interactive);
+  }
+  
+  .chat-input__send:hover:not(:disabled) {
+    background: var(--color-primary-hover);
+  }
+  
+  .chat-input__send:active:not(:disabled) {
+    background: var(--color-primary-active);
+    transform: scale(0.94);
+  }
+  
+  .chat-input__send:disabled {
+    background: var(--color-surface-dynamic);
+    color: var(--color-text-faint);
+    cursor: not-allowed;
+  }
+  
+  .chat-input__hint {
+    font-size: var(--text-xs);
+    color: var(--color-text-faint);
+    padding-left: var(--space-2);
+    margin: 0;
+  }
